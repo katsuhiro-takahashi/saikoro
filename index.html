@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サイコロプログラム</title>
+  <link href="./css/style.css" rel="stylesheet"></link>
+</head>
+<body>
+  <div class="container">
+    <div class="wrap">
+      <h1>サイコロプログラム作成</h1>
+      <input type="submit" id="myfunc" value="サイコロを振る"><br>
+      <img id="saikorox" src="img/saikoro_1.png" alt="サイコロ">
+    </div>
+  </div>
+  <script>
+    // 変数定義など
+    let suji = 0;
+    let loop = 0;
+    let src1 = 'http://localhost/dice/hello-git/img/saikoro_';
+    let src2 = '.png';
+    const myfunc = document.getElementById("myfunc");
+
+    // サイコロを振るボタンをクリックした場合に関数「 dice」を呼ぶ
+    myfunc.addEventListener("click", function() {
+      dice();
+    });
+
+
+
+    // 関数「dice」
+    /************************************************************************
+    1.sujiが1～6まで順番にカウントアップしていく想定の関数です
+    2.変数loopは、1～6までサイコロ画像を変更する処理をさらに4回繰り返すために準備しました(1～6を4回・・・つまり1～6、1～6、1～6、1～6となります)
+    3.ランダムに表示する例も組み込んでいます
+    ************************************************************************/
+    function dice(){
+      let saikoro = document.getElementById("saikorox");
+      suji++;
+      /************************************************************************
+      1.サイコロ画像のアドレスを準備 → saraさんは「localhost/HTML/html/img/saikoro_」+suji+「.png」を準備します
+      2.html内のid=saikoroxのsrc=""を書き換えます・・・・<img>部分が変わりますので、画像が切り替わります
+      ************************************************************************/
+      // saikoro.src = src1+suji+src2;
+
+      /************************************************************************
+      例えばランダムに画像を切り替える場合は、sujiは使用せずに以下にしても・・・
+      1.Math.random() ・・・　0～1未満の間の少数点以下の数字を取得します。
+      2.Math.floor() ・・・　少数点以下の数字を切り捨てます。
+      ************************************************************************/
+      rand = Math.floor( Math.random() * 6) + 1;
+      saikoro.src = src1+rand+src2;
+
+
+      console.log(saikoro.src); // 書き換えた内容をconsole.logでも確認
+
+      /************************************************************************
+      1.関数「dice()」自分自身を呼び出す部分の制御
+      　(※再帰関数やクロージャと言います)
+      ************************************************************************/
+      if(suji < 6){ // sujiが 6 未満は自分自身を呼ぶ
+        setTimeout(function() {
+          dice();
+        },100);   // 200ミリ秒後に関数「dice()」(※自分自身)を呼び出します
+      }
+      else {      // sujiが6以上になった場合に、サイコロの目を初期化
+        suji = 0; // 次のクリック時処理用に初期化
+        loop++;   // 4回繰り返すカウント
+        if(loop < 4) { //
+          setTimeout(function() {
+            dice();
+          },100);
+        }
+        else { // サイコロが「1～6」×4回された場合は、次のクリック時処理用に初期化
+          loop = 0;
+        }
+      }
+    }
+  </script>
+</body>
+</html>

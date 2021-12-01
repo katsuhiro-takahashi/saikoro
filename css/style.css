@@ -1,0 +1,27 @@
+.circle {
+  background: gray;
+  border-radius: 50%;
+  transform: rotate(360deg);
+}
+
+.circle2 {
+  background: gray;
+  border-radius: 50%;
+  transform: rotate(360deg);
+}
+h1 {
+  font-weight: bold;
+  font-size: 15px;
+}
+input[type="submit"] {
+  display: block;
+  width: 8rem;
+  margin: 0 auto;
+  /* text-align: center; */
+}
+.container {
+  width: 20rem;
+}
+.wrap {
+  text-align: center;
+}

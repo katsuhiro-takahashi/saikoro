@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サイコロプログラム</title>
+  <link href="./css/style.css" rel="stylesheet"></link>
+</head>
+<body>
+  <div class="container">
+    <div class="wrap">
+      <h1>サイコロプログラム作成</h1>
+      <input type="submit" id="myfunc" value="サイコロを振る"><br>
+      <img id="saikorox" src="img/saikoro_1.png" alt="サイコロ">
+      <div id="msg" class="msg"></div>
+    </div>
+  </div>
+  <script>
+    // 変数定義など
+    let suji = 0;
+    let loop = 0;
+    let src1 = './img/saikoro_';
+    let src2 = '.png';
+    let saikoro = document.getElementById("saikorox");
+    let msg  = document.getElementById("msg");
+
+    const myfunc = document.getElementById("myfunc");
+    let diceimg  = '';
+    // サイコロを振るボタンをクリックした場合に関数「 dice」を呼ぶ
+    myfunc.addEventListener("click", function() {
+      dice = setInterval(function() {
+        msg.innerHTML = '';
+        let no = DiceImg();
+        if(suji > 5) {
+          msg.innerHTML = '出た目は「'+no+'」です';
+          suji  = 0;
+          clearInterval(dice);
+        }
+      },100);
+    });
+    function DiceImg() {
+      suji++;
+      rand = Math.floor( Math.random() * 6) + 1;
+      saikoro.src = src1+rand+src2;
+      console.log(suji);
+      return rand;
+    }
+  </script>
+</body>
+</html>
